@@ -1,6 +1,6 @@
 # Boilerplate
 
-Notes app
+Notes app.
 
 ## Authors
 
