@@ -2,15 +2,17 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
-
 html {
     font-size: 62.5%; 
 }
 
 body {
-    font-family: Helvetica, Arial, sans-serif;
+    background-color:$body-background-color;
+    font-family: $body-default-font-family;
     font-size: $base-font-size;
+    color: $body-default-color;
 }
 
 h1 {
@@ -23,7 +25,8 @@ h2 {
 }
 
 a {
-    color: black;
+    color: $body-default-color;
+
 }
 
 input[type=text], input[type=email], input[type=password] {
@@ -31,4 +34,6 @@ input[type=text], input[type=email], input[type=password] {
     font-size: $base-font-size;
     margin-bottom: $space;
     padding: $input-spacing;
+    font-family: $body-default-font-family;
+    color: $body-default-color;
 }

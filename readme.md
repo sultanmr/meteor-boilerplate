@@ -1,6 +1,6 @@
 # Boilerplate
 
-This is a basic boilerplate meteor app
+Notes app
 
 ## Authors
 

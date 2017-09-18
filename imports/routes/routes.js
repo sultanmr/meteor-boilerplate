@@ -1,8 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import  React  from 'react';
-import  ReactDOM from 'react-dom';
-
-
+import React from 'react';
 import {
   Router,
   Route,
@@ -10,47 +7,71 @@ import {
   Switch
 } from 'react-router-dom'
 import createBrowserHistory from 'history/createBrowserHistory'
+import { Session } from 'meteor/session';
 
 import Signup from '../ui/Signup';
 import Dashboard from '../ui/Dashboard';
 import NotFound from '../ui/NotFound';
 import Login from '../ui/Login';
-import Footer from '../ui/Footer';
 
-const history = createBrowserHistory();
-window.browserHistory = history;
+this.browserHistory= createBrowserHistory();
+ window.history = this.browserHistory;
 
+export const onAuthChange = (isAuthenticated, currentPagePrivacy) => {
+  const isUnauthenticatedPage = currentPagePrivacy === 'unauth';
+  const isAuthenticatedPage = currentPagePrivacy === 'auth';
 
-
-export const onAuthChange = (isAuthenticated) => {
-  const pathname = history.location.pathname;
-
-  console.log ('isAuthenticated', isAuthenticated);
-  console.log ('pathname', pathname);
+  if (isUnauthenticatedPage && isAuthenticated) {
+    browserHistory.replace('/dashboard');
+  } else if (isAuthenticatedPage && !isAuthenticated) {
+    browserHistory.replace('/');
+  }
 };
 
+renderComponent = (jsxUnAuthComponent, jsxAuthComponent ) => {
+  if(!!Meteor.userId()) {
+    Session.set('currentPagePrivacy', 'auth');
+    return jsxAuthComponent;
+  }
+ 
+  Session.set('selectedNoteId', undefined);
+  Session.set('currentPagePrivacy', 'unauth');
+  return jsxUnAuthComponent;
+}
 
 export const routes = (
+  <Router history={this.browserHistory} >
+   {/* <>   */}
+    <Switch >
+      <Route exact path="/"
+      render={()=> {
+        return this.renderComponent(<Login/>, <Dashboard/>);
+      }}/>
+      <Route  path="/login"
+       render={()=> {
+        return this.renderComponent(<Login/>, <Dashboard/>);
+      }}/>
+      <Route path="/signup" 
+           render={()=> {
+        return this.renderComponent(<Signup/>, <Dashboard/>);
+      }}/>
 
-      <Router history={history}>  
-    <div>
-    {/* <ul>
-        <li><Link to="/signup">signup</Link></li>
-        <li><Link to="/login">login</Link></li>
-        <li><Link to="/links">links</Link></li>
-      </ul>
+      <Route  path="/dashboard"
+      render={ ()=>{
+        return this.renderComponent(<Login/>, <Dashboard/>);
+      }}/>
 
-      <hr/> */}
-      <Switch>
-        <Route exact path="/" component={Dashboard}/>
-        <Route path="/signup" component={Signup}/>
-        <Route path="/login" component={Login}/>
-        <Route component={NotFound}/>
-      </Switch>
+
+      <Route path="/dashboard/:id" 
+        render={ ()=>{
+        return this.renderComponent(<Login/>, <Dashboard/>);
+      }}/>
+
+      />
       
-      <Route path="*" component={Footer}/>
-    </div>
+
+      <Route component={NotFound}/>
+
+   </Switch>    
   </Router>
 );
-
-
