@@ -1,4 +1,4 @@
-# Boilerplate
+# Notes App
 
 Notes app.
 
