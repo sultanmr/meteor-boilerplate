@@ -8,30 +8,30 @@ import {Notes} from '../api/notes';
 import NoteListHeader from './NoteListHeader';
 import NoteListEmptyItem from './NoteListEmptyItem';
 import NoteListItem from './NoteListItem';
-
-export const NoteList = (props) => {
+import MainMenu from './MainMenu';
+export default SideBar = (props) => {
     return (
         <div className="item-list">
-        <NoteListHeader/>
+        <MainMenu/>
+        {/* <NoteListHeader/>
         { props.notes.length===0 ? <NoteListEmptyItem/> : '' }
         {props.notes.map((note)=>{
             return <NoteListItem key={note._id} note={note} />;
-        })}
+        })} */}
         </div>
     );
 };
 
-NoteList.propTypes = {
-    notes: PropTypes.array.isRequired
-}
-export default createContainer (()=>{
-    const selectedNoteId = Session.get('selectedNoteId');
-    Meteor.subscribe ('notes');
+// SideBar.propTypes = {
+//     notes: PropTypes.array.isRequired
+// }
+// export default createContainer (()=>{
+//     // const selectedNoteId = Session.get('selectedNoteId');
+//     // Meteor.subscribe ('notes');
 
-    return  {
-        // notes: Notes.find().fetch()
-        notes: Notes.find().fetch().map((note)=>{
-            return {...note, selected: note._id===selectedNoteId};
-        })
-    };
-}, NoteList);
+//     // return  {
+//     //     notes: Notes.find().fetch().map((note)=>{
+//     //         return {...note, selected: note._id===selectedNoteId};
+//     //     })
+//     // };
+// }, SideBar);

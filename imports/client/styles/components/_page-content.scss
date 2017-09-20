@@ -3,12 +3,15 @@
 .page-content {
     max-width: $site-max-width;
     margin: 0 auto;
+
+    
     padding: $large-space $space;
+ 
     display: flex;
     height: $page-content-height;
     
     @include desktop {
-        padding: $large-space $space;
+        padding: $menu-height+$header-height $space;
     }
 
 }
@@ -17,7 +20,7 @@
     display: flex;
     transition: left .5s ease;
     width:100vw;
-    z-index: 1;
+    // z-index: 1;
  
     position: fixed;
     top:$header-height;

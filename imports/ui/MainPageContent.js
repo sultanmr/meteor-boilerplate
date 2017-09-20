@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 
 import {Notes} from '../api/notes';
 
-export  class Editor extends React.Component {
+export  class MainPageContent extends React.Component {
   
     constructor (props) {
         super (props);
@@ -69,7 +69,7 @@ export  class Editor extends React.Component {
 
 }
 
-Editor.propTypes = {
+MainPageContent.propTypes = {
     note: PropTypes.object,
     selectedNoteId: PropTypes.string
 }
@@ -82,4 +82,4 @@ export default createContainer (()=>{
         note: Notes.findOne (selectedNoteId),
         call: Meteor.call
     }
-}, Editor);
+}, MainPageContent);

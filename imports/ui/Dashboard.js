@@ -1,18 +1,20 @@
 
 import React from 'react';
 
-import PrivateHeader from './PrivateHeader';
-import NoteList from './NoteList';
-import Editor from './Editor';
-
+import Header from './Header';
+import MainMenu from './MainMenu';
+import SideBar from './SideBar';
+import MainPageContent from './MainPageContent';
+import FillWithText from './FillWithText';
 export default () => {
 
     return (
-        <div>
-            <PrivateHeader title="Notes" />
-            <div className='page-content'>
-            <div  className= "page-content__sidebar"><NoteList/></div>
-            <div  className= "page-content__main"><Editor/></div>
+        <div>        
+            <Header title="Dashboard" />             
+            <div className='page-content'>           
+            <div  className= "page-content__sidebar"><SideBar/></div>
+            <div  className= "page-content__main"><MainPageContent/></div>
+            <FillWithText/>
             </div>
         </div>
 
